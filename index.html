@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>$HAMSTERWHEEL: RUN OR RUG</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Comic Sans MS;
+      text-align: center;
+    }
+    #livestream {
+      border: 5px solid red;
+      width: 500px;
+      margin: auto;
+      position: relative;
+    }
+    #livestream::after {
+      content: "LIVE";
+      color: red;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 24px;
+      animation: glitch 1s infinite;
+    }
+    @keyframes glitch {
+      0% { text-shadow: 2px 2px #0ff; }
+      50% { text-shadow: -2px -2px #f0f; }
+      100% { text-shadow: 2px 2px #0ff; }
+    }
+    button {
+      background: #ff69b4;
+      padding: 20px;
+      font-size: 20px;
+      border: none;
+      cursor: pointer;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🐹 $HAMSTERWHEEL CEO LIVE 🐹</h1>
+  <div id="livestream">
+    <img src="hamster.gif" alt="hamster running" width="500">
+  </div>
+  <div id="energy-bar">
+    <div id="energy" style="width: 60%;"></div>
+  </div>
+  <p>Liquidity Fuel: <span id="energy-percent">60%</span></p>
+  <button onclick="feedHamster()">FEED HAMSTER (BUY NOW)</button>
+  <script>
+    let energy = 60;
+    // Energy drops 1% every 30 seconds
+    setInterval(() => {
+      energy = Math.max(0, energy - 1);
+      updateEnergy();
+      if (energy <= 20) alert("HAMSTER STARVING! BUY NOW!");
+    }, 30000);
+
+    function feedHamster() {
+      window.open("[PUMP.FUN LINK]", "_blank"); 
+      energy = Math.min(100, energy + 5); // +5% energy per buy
+      updateEnergy();
+    }
+
+    function updateEnergy() {
+      document.getElementById("energy").style.width = energy + "%";
+      document.getElementById("energy-percent").textContent = energy + "%";
+    }
+  </script>
+</body>
+</html>
