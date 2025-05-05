@@ -11,6 +11,14 @@
       margin: 0;
       padding: 20px;
     }
+    .section {
+      background: #1a1a1a;
+      border: 3px solid #ff69b4;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 800px;
+    }
     #hamster-container {
       border: 5px solid #ff0000;
       width: 500px;
@@ -58,25 +66,76 @@
     button:hover {
       background: #ff1493;
     }
+    #news-ticker {
+      background: #ff0000;
+      padding: 10px;
+      margin: 20px auto;
+      width: 80%;
+      border-radius: 5px;
+    }
+    .collapsible {
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <h1>🐹 $HAMSTERWHEEL CEO LIVE 🐹</h1>
-  
+
+  <!-- Live Hamster Stream -->
   <div id="hamster-container">
-    <!-- WORKING HAMSTER GIF -->
     <img src="https://media.giphy.com/media/V6ZvQXeJptrdnd2Sip/giphy.gif" alt="Hamster running" width="500">
   </div>
 
+  <!-- Energy Meter -->
   <div id="energy-bar">
     <div id="energy"></div>
   </div>
   <p>Liquidity Fuel: <span id="energy-percent">60%</span></p>
 
+  <!-- Buy Button -->
   <button onclick="feedHamster()">FEED HAMSTER (BUY NOW)</button>
+
+  <!-- Fake News Ticker -->
+  <div id="news-ticker">
+    <marquee>🚨 BREAKING: Hamster CEO demands more $WHEEL buys! 🚨</marquee>
+  </div>
+
+  <!-- Explanatory Sections -->
+  <div class="section">
+    <h2 class="collapsible" onclick="toggleSection('how-it-works')">📖 HOW IT WORKS ▼</h2>
+    <div id="how-it-works">
+      <p>Meet <strong>Mr. Whiskers</strong>, our CEO. He runs the wheel 24/7 to power $HAMSTERWHEEL’s liquidity. If he stops, the rug gets pulled. Your buys feed him seeds (metaphorically).</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="collapsible" onclick="toggleSection('tokenomics')">💸 TOKENOMICS ▼</h2>
+    <div id="tokenomics">
+      <p>➜ Total Supply: 10,000,000,000 $WHEEL<br>
+         ➜ Tax: 0% (Hamsters hate taxes)<br>
+         ➜ Liquidity: Locked in a metaphorical hamster ball</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="collapsible" onclick="toggleSection('roadmap')">🗺️ ROADMAP ▼</h2>
+    <div id="roadmap">
+      <p>🐹 Phase 1: Hamster runs. You buy. We all pretend this is normal.<br>
+         🚀 Phase 2: Upgrade to a Tesla Hamster Wheel™ (v2 token).<br>
+         🌕 Phase 3: Replace the moon with a giant hamster wheel.</p>
+    </div>
+  </div>
+
+  <!-- Hamster Status Widget -->
+  <div class="section">
+    <h2>📡 HAMSTER STATUS</h2>
+    <p id="hamster-status">Current Mood: <span id="mood">Grinding for your bags</span></p>
+    <p id="hamster-timer">Time Until Next Break: <span id="countdown">10:00</span></p>
+  </div>
 
   <script>
     let energy = 60;
+    let countdown = 600; // 10 minutes in seconds
 
     // Energy depletion every 30 seconds
     setInterval(() => {
@@ -87,6 +146,18 @@
       }
     }, 30000);
 
+    // Countdown timer
+    setInterval(() => {
+      countdown--;
+      let minutes = Math.floor(countdown / 60);
+      let seconds = countdown % 60;
+      document.getElementById("countdown").textContent = 
+        `${minutes}:${seconds.toString().padStart(2, '0')}`;
+      if (countdown <= 0) {
+        document.getElementById("mood").textContent = "ON STRIKE! BUY NOW!";
+      }
+    }, 1000);
+
     function feedHamster() {
       window.open("YOUR-PUMP.FUN-LINK", "_blank");
       energy = Math.min(100, energy + 5);
@@ -96,6 +167,11 @@
     function updateEnergy() {
       document.getElementById("energy").style.width = energy + "%";
       document.getElementById("energy-percent").textContent = energy + "%";
+    }
+
+    function toggleSection(id) {
+      const section = document.getElementById(id);
+      section.style.display = section.style.display === 'none' ? 'block' : 'none';
     }
   </script>
 </body>
